@@ -1,0 +1,13 @@
+#!/bin/bash
+
+DAEMON_NAME=bzlogd
+DAEMON_PROC=$(ps aux | grep ${DAEMON_NAME} | grep python)
+DAEMON_PID=$(echo $DAEMON_PROC | tr -s " " | cut -d " " -f 2)
+
+if [ -z "$DAEMON_PROC" ]; then
+	echo "Daemon ${DAEMON_NAME} process not found."
+else
+	echo $DAEMON_PROC
+	sudo kill $DAEMON_PID
+fi
+
